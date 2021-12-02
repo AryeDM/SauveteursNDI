@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<!-- Cette balise indique l'encodage utilisé -->
+	<meta charnet="UTF-8">
+	<meta name="viewpoint" content="width-device-width, initial-scale= 1.0">
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+  	    {% load static %}
+
+	<link rel="stylesheet" href="{% static 'fenouil/monstyle.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+
+<!-- Menu de navigation du site -->
+	<div class="header">
+	<div class="haut-container">
+  		<div class= 'nav-bar'>
+
+  			<div class="nav-logo1"> 
+				<img src="{% static 'fenouil/images/logo-deco-perso1.png' %}">
+			</div>	
+
+			<div class="Coté-gauche">
+
+				<div class="link">
+  					<a href="Fenouil/homepage.html">Page d'accueil </a><i class="fa fa-home" style="font-size:24px; color: #cb99ef" ></i>
+  				</div>
+
+ 				<div class="link">
+ 					<a href="Fenouil/login.html">Se connecter  </a><i class="fa fa-user-circle" style="font-size:24px;color: #cb99ef" > </i>
+ 				</div>
+ 				<div class="link">
+          <a href="Fenouil/catalogue.html">Catalogue  </a> <i class="fa fa-external-link"style="font-size:24px; color: #cb99ef"></i>
+  			</div>
+
+        <div class="link">
+  					<a href="Fenouil/Panier.html">Panier  </a><i class="fa fa-shopping-cart" style="font-size:24px;color: #cb99ef"></i>
+  			</div>
+
+  		<div>
+
+  					<!-- Barre de recherche du site -->
+					<p> Vous êtes enregistré sous le nom de {{request.user}} </p>
+					<label for="site-search">Recherche:</label>
+					<input type="search" id="site-search" name="q"
+       					aria-label="Search through site content"
+       					placeholder="Rechercher sur le site…">
+					<button>Search</button>
+  				</div>
+
+  			</div>
+			<p><a href="{% url 'logout' %}">Se déconnecter </a> </p>
+		</div>
+
+
+		<!-- Les elements que la barre de menu doit afficher en liste de cote droite de la page -->
+
+		<div id="sideNav">
+			<nav>
+				<ul>
+					<li> <a href="Fenouil/homepage.html">Home page</a></li>
+					<li><a href="Fenouil/login.html">Se connecter</a></li>
+					<li><a href="Fenouil/Panier.html">Panier</a></li>
+					<li><a href="Fenouil/catalogue.html">Catalogue</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div id="menuBtn">
+  			<img src="{% static 'fenouil/images/menu.png' %}" id="menu">
+  		</div>
+
+  		<div class="Description">
+  			{% block content %}{% endblock %}
+		</div>
+
+	</div>
+</div>
+
+<div class="Les_categories">
+	{% block categories %} {% endblock %}
+</div>
+<div class="petit-container">
+	{% block petit_container %} {% endblock %}
+
+</div>
+<div class="offer">
+	{% block offer %} {% endblock %}
+
+</div>
+
+<div class="hero">
+	{% block hero %} {% endblock %}
+
+</div>
+
+
+		<div class="footer">
+			<div class="haut-container">
+				<div class="Description">
+
+					<!--Les colonnes dans le footer de la page -->
+					<div class="footer-col1">
+						<h3> Download App</h3>
+						<p>Download for Android and IOS </p>
+
+						<div class="app-logo">
+							<img src="{% static 'fenouil/images/app-store.png' %}">
+							<img src="{% static 'fenouil/images/play-store.png' %}">
+						</div>
+					</div>
+
+					<div class="footer-col2">
+						<div class="nav-logo">
+						Fenouil</br>
+						<p> powered by</p> <img src="{% static 'fenouil/images/logo-team.png' %}">
+						</div>
+					</div>
+
+					<div class="footer-col3">
+						<h3> Useful Links</h3>
+						<ul>
+							<li>Mentions légales</li>
+							<li>Blog Post</li>
+							<li>Return Policy</li>
+							<li><a href="#"> Nous contacter </a></li>
+						</ul>
+					</div>
+
+					<div class="footer-col4">
+						<h3> Follow Us</h3>
+						<ul>
+							<li><a href="#">Facebook</a></li>
+							<li><a href="https://github.com/AryeDM/ProjetFenouil">GitHub</a></li>
+							<li><a href="#">Instagram</a></li>
+							<li><a href="#">Twitter</a></li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+				<p class="Copyright">Copyright 2021 Fenouil -Tous droits réservés </p>
+			</div>
+		</div>
+	</div>
+
+<!-- Le script avec javascript pour povoir changer les photos en haut de la page-->
+<script type="text/javascript" >
+
+	var list1 = document.getElementsByClassName("list1");
+	var gallery = document.getElementById("gallery");
+
+	var images = new Array(
+		"{% static 'fenouil/images/Décoration1.png' %}",
+		"{% static 'fenouil/images/Décoration2.png' %}",
+		"{% static 'fenouil/images/Décoration3.png' %}",
+		"{% static 'fenouil/images/Décoration4.png' %}"
+	);
+
+	for (let i=0; i<list1.length; i++){
+		list1[i].onclick = function()
+		{
+			gallery.src = images[i];
+			let current = document.getElementsByClassName("active");
+			current[0].className = current[0].className.replace("active", "");
+			this.className += "active";
+		};
+	}
+
+	var menuBtn = document.getElementById("menuBtn")
+	var sideNav = document.getElementById("sideNav")
+	var menu = document.getElementById("menu")
+
+	sideNav.style.right = "-250px";
+
+
+	menuBtn.onclick = function(){
+		if(sideNav.style.right == "-250px"){
+			sideNav.style.right = "0";
+			menu.src = "{% static 'fenouil/images/close.png' %}";
+		}
+		else{
+			sideNav.style.right = "-250px";
+			menu.src = "{% static 'fenouil/images/menu.png' %}"; 
+
+		}
+	}
+
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("btn1");
+
+    function register(){
+      x.style.left = "-400px";
+      y.style.left = "50px";
+      z.style.left = "110px";
+    }
+    function login(){
+      x.style.left = "50px";
+      y.style.left = "450px";
+      z.style.left = "0";
+    }
+
+</script>
+</body>
+
+
+</html>
